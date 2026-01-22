@@ -23,7 +23,7 @@
       background: var(--bg);
       color: var(--text);
       font-family: "Times New Roman", Times, serif;
-      font-size: 18px;
+      font-size: 1.1rem;
       line-height: 1.6;
     }
 
@@ -41,14 +41,16 @@
     }
 
     h1 {
-      font-size: 40px;
+      font-size: 44px;
       font-weight: 700;
-      line-height: 1.15;
-      margin-top: 10px;
+      line-height: 1.2;
+      margin-top: 18px;
+      margin-bottom: 18px;
+      letter-spacing: -0.02em;
     }
 
     h2 {
-      font-size: 26px;
+      font-size: 32px;
       font-weight: 700;
       margin: 44px 0 14px;
     }
@@ -68,32 +70,43 @@
     }
 
     .authors {
-      margin-top: 10px;
-      font-size: 18px;
+      margin-top: 8px;
+      font-size: 20px;
     }
 
     .authors a {
+      color: #1a4fd8;
       font-weight: 600;
     }
 
     .affils {
       margin-top: 6px;
-      color: var(--muted);
-      font-size: 17px;
+      color: #666;
+      font-size: 16px;
     }
 
     .links {
-      margin-top: 12px;
-      font-size: 20px;
+      margin-top: 16px;
     }
 
-    .links a {
-      font-weight: 600;
-    }
-
-    .links span {
+    .links .pill {
       display: inline-block;
-      margin: 0 8px;
+      padding: 8px 18px;
+      margin: 0 6px;
+      border-radius: 999px;
+      background: #222;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .links .pill:hover {
+      background: #000;
+    }
+
+    .hero {
+      margin-bottom: 28px;
     }
 
     hr {
@@ -121,7 +134,7 @@
     figcaption {
       margin-top: 10px;
       color: var(--muted);
-      font-size: 16px;
+      font-size: 1.1rem;
       text-align: center;
     }
 
@@ -181,6 +194,113 @@
       text-align: center;
     }
 
+    .note {
+      max-width: 900px;
+      margin: 10px auto 0;
+      color: var(--muted);
+      font-size: 1.1rem;
+      text-align: center;
+    }
+
+    .cvpr-table-wrap {
+      overflow-x: auto;
+      max-width: 980px;
+      margin: 14px auto 0;
+    }
+
+    table.cvpr-table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 16px;
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    table.cvpr-table th,
+    table.cvpr-table td {
+      padding: 10px 10px;
+      border-bottom: 1px solid #eee;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    table.cvpr-table thead th {
+      background: #fafafa;
+      font-weight: 700;
+    }
+
+    table.cvpr-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .cvpr-group td {
+      text-align: center;
+      font-weight: 700;
+      background: #fcfcfc;
+    }
+
+    .cvpr-caption {
+      max-width: 980px;
+      margin: 10px auto 0;
+      color: var(--muted);
+      font-size: 16px;
+      text-align: center;
+    }
+
+    /* --- video modal --- */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.72);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 9999;
+    }
+
+    .modal.open { display: flex; }
+
+    .modal-inner {
+      width: min(1200px, 96vw);
+      max-height: 90vh;
+    }
+
+    .modal video {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+      background: #000;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+    }
+
+    .modal-close {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 0;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    .modal-close:hover { background: rgba(255,255,255,0.18); }
+
+    /* Make the inline video feel clickable */
+    .clickable-media {
+      cursor: pointer;
+    }
+
+    @media (max-width: 640px) {
+     h2 { font-size: 26px; }
+    }
     @media (max-width: 820px) {
       .two { grid-template-columns: 1fr; }
     }
@@ -193,8 +313,7 @@
       figcaption { font-size: 15px; }
     }
   </style>
-</head>
-
+<header class="hero">
 <body>
   <div class="container">
     <h1>UniFlow: Towards Zero-Shot LiDAR Scene Flow for Autonomous Vehicles via Cross-Domain Generalization</h1>
@@ -214,17 +333,15 @@
       <sup>3</sup>Carnegie Mellon University
     </div>
 
-    <div class="center links" aria-label="project links">
-      <span>[<a href="https://arxiv.org/abs/2511.18254" target="_blank" rel="noreferrer">Paper</a>]</span>
-      <span>[<a href="https://github.com/lisiyi777/UniFlow" target="_blank" rel="noreferrer">Code</a>]</span>
+    <div class="center links">
+      <a class="pill" href="https://arxiv.org/abs/2511.18254" target="_blank">Paper</a>
+      <a class="pill" href="https://github.com/lisiyi777/UniFlow" target="_blank">Code</a>
     </div>
 
-    <!-- HERO: Use Figure 1, a video hero, or a custom teaser you make -->
     <figure>
       <img src="figures/teaser.png" alt="UniFlow teaser" />
       <figcaption>
-        <b>Teaser.</b> Unified multi-dataset training improves LiDAR scene flow generalization across sensors and environments.
-        (Replace <code>figures/teaser.png</code> with Figure 1 / a custom teaser.)
+         RGB views, LiDAR setups, and BEV point clouds from Argoverse 2, Waymo, nuScenes, and TruckScenes illustrate the cross-domain challenge of LiDAR scene flow.
       </figcaption>
     </figure>
 
@@ -233,76 +350,150 @@
     <h2>Abstract</h2>
     <div class="text">
       <p>
-        LiDAR scene flow is the task of estimating per-point 3D motion between two point clouds. Recent methods achieve centimeter-level accuracy on popular autonomous vehicle (AV) datasets, but are typically only trained and evaluated on a single sensor. In this paper, we aim to learn general motion priors that transfer to diverse and unseen LiDAR sensors. However, prior work in LiDAR semantic segmentation and 3D object detection demonstrate that naively training on multiple datasets yields worse performance than single dataset models. Interestingly, we find that this conventional wisdom does not hold for motion estimation, and that state-of-the-art scene flow methods greatly benefit from cross-dataset training. We posit that low-level tasks such as motion estimation may be less sensitive to sensor configuration; indeed, our analysis shows that models trained on fast-moving objects (e.g., from highway datasets) perform well on fast-moving objects, even across different datasets. Informed by our analysis, we propose UniFlow, a family of feedforward models that unifies and trains on multiple large-scale LiDAR scene flow datasets with diverse sensor placements and point cloud densities. Our frustratingly simple solution establishes a new state-of-the-art on Waymo and nuScenes, improving over prior work by 5.1% and 35.2% respectively. Moreover, UniFlow achieves state-of-the-art accuracy on unseen datasets like TruckScenes, outperforming prior TruckScenes-specific models by 30.1%.        
+        LiDAR scene flow is the task of estimating per-point 3D motion between two point clouds. Recent methods achieve centimeter-level accuracy on popular autonomous vehicle (AV) datasets, but are typically only trained and evaluated on a single sensor. In this paper, we aim to learn general motion priors that transfer to diverse and unseen LiDAR sensors. However, prior work in LiDAR semantic segmentation and 3D object detection demonstrate that naively training on multiple datasets yields worse performance than single dataset models. 
+      </p>
+      </p>
+        Interestingly, we find that this conventional wisdom does not hold for motion estimation, and that state-of-the-art scene flow methods greatly benefit from cross-dataset training. We posit that low-level tasks such as motion estimation may be less sensitive to sensor configuration; indeed, our analysis shows that models trained on fast-moving objects (e.g., from highway datasets) perform well on fast-moving objects, even across different datasets. 
+      </p>
+      </p>
+        Informed by our analysis, we propose UniFlow, a family of feedforward models that unifies and trains on multiple large-scale LiDAR scene flow datasets with diverse sensor placements and point cloud densities. Our frustratingly simple solution establishes a new state-of-the-art on Waymo and nuScenes, improving over prior work by 5.1% and 35.2% respectively. Moreover, UniFlow achieves state-of-the-art accuracy on unseen datasets like TruckScenes, outperforming prior TruckScenes-specific models by 30.1%.        
       </p>
     </div>
 
-    <h2>A. Why UniFlow?</h2>
-    <div class="text">
-      <p>
-        UniFlow is an insight-driven study on cross-domain generalization for LiDAR scene flow.
-        Unlike LiDAR semantics and detection, scene flow estimates low-level geometric motion and is less sensitive to dataset taxonomies.
-        This suggests that motion priors learned from diverse datasets can transfer across sensors and environments.
-      </p>
-    </div>
+    <hr />
 
-    <!-- SECTION A VISUAL: a simple conceptual diagram contrasting semantics vs motion -->
+    <h2>Cross-Dataset Generalization Correlates with Velocity Distribution</h2>
+
     <figure>
-      <img src="figures/sectionA_concept.png" alt="Conceptual comparison: semantics vs motion" />
+      <img src="figures/figure_two.png" alt="Velocity distribution and bucketed performance" />
       <figcaption>
-        <b>Concept.</b> Scene flow is a low-level geometric task; motion priors are more transferable than dataset-specific semantic taxonomies.
+        The velocity distributions for the AV2, Waymo, nuScenes, and TruckScenes train sets (top). The Dynamic Mean EPE per velocity bin of Flow4D trained on AV2, Waymo, nuScenes, TruckScenes, and UniFlow (bottom). Notably, Flow4D trained on TruckScenes outperforms Flow4D trained on any other dataset for fast-moving objects (2.0, ∞) across all datasets, as TruckScenes contains the largest number of fast-moving objects.
       </figcaption>
     </figure>
 
-    <h2>B. Unified training works (across models)</h2>
+    <hr />
+
+    <h2>Quantitative Results</h2>
+
+    <div class="cvpr-table-wrap">
+      <table class="cvpr-table" aria-label="Dynamic Bucket-Normalized Mean EPE across datasets">
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>AV2</th>
+            <th>Waymo</th>
+            <th>nuScenes</th>
+            <th>TruckScenes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>NSFP</td><td>0.422</td><td>0.574</td><td>0.602</td><td>0.658</td></tr>
+          <tr><td>FastNSF</td><td>0.383</td><td>–</td><td>0.560</td><td>0.588</td></tr>
+          <tr><td>SeFlow</td><td>0.309</td><td>0.328</td><td>0.554</td><td>0.681</td></tr>
+          <tr><td>ICP Flow</td><td>0.331</td><td>–</td><td>–</td><td>0.472</td></tr>
+          <!-- <tr><td>EulerFlow</td><td>0.130</td><td>–</td><td>–</td><td>–</td></tr> -->
+          <!-- <tr><td>TrackFlow</td><td>0.269</td><td>–</td><td>–</td><td>–</td></tr> -->
+          <tr><td>DeFlow</td><td>0.276</td><td>–</td><td>0.314</td><td>0.570</td></tr>
+          <tr><td>SSF</td><td>0.181</td><td>0.264</td><td>0.220</td><td>0.453</td></tr>
+          <tr><td>Flow4D</td><td>0.145</td><td>0.215</td><td>0.230</td><td>0.456</td></tr>
+          <tr><td>&#916;Flow</td><td>0.113</td><td>0.198</td><td>0.216</td><td>0.402</td></tr>
+
+          <tr class="cvpr-group">
+            <td class="method-group">UniFlow (Ours)</td>
+            <td class="group-spacer" colspan="5"></td>
+          </tr>
+          <tr><td>UniFlow-SSF</td><td>0.156</td><td>0.234</td><td>0.144</td><td>0.435</td></tr>
+          <tr><td>UniFlow-Flow4D</td><td>0.132</td><td>0.191</td><td>0.196</td><td>0.281</td></tr>
+          <tr><td>UniFlow-&#916;Flow</td><td>0.118</td><td>0.188</td><td>0.140</td><td>0.101</td></tr>
+        </tbody>
+      </table>
+    </div>
+
     <div class="text">
       <p>
-        UniFlow retrains multiple strong supervised scene flow backbones under a unified multi-dataset regime (AV2, Waymo, nuScenes),
-        without changing architectures.
-        This yields consistent in-domain gains and strong zero-shot performance on TruckScenes.
+        <b>Comparison to State-of-the-Art Methods.</b>
+        We compare UniFlow against recent scene flow methods using Dynamic Bucket-Normalized Mean EPE across multiple autonomous driving datasets.
+        UniFlow consistently improves performance over single-dataset baselines, with especially strong gains on TruckScenes and nuScenes.
       </p>
     </div>
 
-    <!-- SECTION B VISUAL: one compact headline table/plot from the paper -->
-    <figure>
-      <img src="figures/sectionB_headline_results.png" alt="Headline results table/plot" />
-      <figcaption>
-        <b>Headline results.</b> In-domain improvements (Waymo, nuScenes) and zero-shot generalization to TruckScenes.
-      </figcaption>
-    </figure>
+<hr />
 
-    <h2>C. What drives generalization?</h2>
-    <div class="text">
-      <p>
-        A central finding of UniFlow is that cross-domain performance is strongly tied to the velocity distribution observed during training.
-        Figure 2 connects dataset motion statistics to accuracy across velocity buckets.
-      </p>
-    </div>
+<h2>Qualitative Results</h2>
 
-    <!-- SECTION C: use Figure 2 -->
-    <figure>
-      <img src="figures/figure_two.png" alt="Figure 2: velocity distributions and generalization" />
-      <figcaption>
-        <b>Figure 2.</b> Generalization correlates with motion statistics (velocity distribution / bucketed performance).
-      </figcaption>
-    </figure>
+<figure class="qual-figure">
+  <img
+    src="figures/qualitative_truckscenes.png"
+    alt="Zero-shot generalization on TruckScenes: ΔFlow vs ΔFlow (UniFlow)"
+  />
+  <figcaption>
+    Compared to dataset-specific &#916;Flow, &#916;Flow (UniFlow) produces more accurate motion estimates for rare objects
+    and long-range vehicles under challenging conditions.
+  </figcaption>
+</figure>
 
-    <h2>Video</h2>
-    <div class="text">
-      <p>
-        We include an illustrative video demonstrating UniFlow’s qualitative behavior and cross-domain robustness.
-      </p>
-    </div>
+<figure>
+  <video id="qual-video" class="clickable-media" controls playsinline preload="metadata">
+    <source src="figures/UniFlow_on_TruckScenes.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+</figure>
 
-    <figure>
-      <video controls playsinline preload="metadata">
-        <source src="figures/UniFlow_on_TruckScenes.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      <figcaption>
-        <b>Qualitative video.</b>
-      </figcaption>
-    </figure>
+<div class="text">
+  <p>
+    Scene flow predictions on a challenging rainy sequence from TruckScenes. As shown above and in the video, &#916;Flow frequently produces artifacts on rain streaks and background points, which become especially pronounced during occlusions, and predicts inconsistent flow vectors on dynamic objects. In contrast, &#916;Flow (UniFlow) yields significantly more stable and coherent motion fields.
+  </p>
+</div>
+
+<hr>
+
+<section id="cvpr-challenge">
+  <h2>CVPR 2026 Challenge</h2>
+  <div class="text">
+    <p>
+      We are hosting a challenge at CVPR 2026 to encourage broad community involvement in addressing long-range (up to 75m)
+      LiDAR scene flow across diverse AV datasets. Participants are allowed to train their models on any publicly available
+      datasets (including TruckScenes) and will be evaluated on <b>Argoverse 2</b>, <b>nuScenes</b>, <b>Waymo</b>, and <b>TruckScenes</b>.
+      We include supervised and unsupervised baselines above (Dynamic Bucket-Normalized; lower is better).
+    </p>
+  </div>
+  <div class="cvpr-table-wrap">
+    <table class="cvpr-table" aria-label="CVPR 2026 Challenge Baselines">
+      <thead>
+        <tr>
+          <th>Methods</th>
+          <th>Mean</th>
+          <th>AV2</th>
+          <th>Waymo</th>
+          <th>nuScenes</th>
+          <th>TruckScenes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="cvpr-group">
+          <td class="method-group">Unsupervised</td>
+          <td class="group-spacer" colspan="5"></td>
+        </tr>
+        <tr><td>NSFP</td><td>0.5642</td><td>0.4219</td><td>0.5740</td><td>0.6024</td><td>0.6583</td></tr>
+        <tr><td>FastNSF</td><td>0.4971</td><td>0.3826</td><td>0.4576</td><td>0.5597</td><td>0.5884</td></tr>
+        <tr><td>SeFlow</td><td>0.4710</td><td>0.3085</td><td>0.3509</td><td>0.5440</td><td>0.6808</td></tr>
+        <tr><td>TeFlow</td><td>0.3465</td><td>0.2051</td><td>0.2747</td><td>0.3954</td><td>0.5108</td></tr>
+        <tr class="cvpr-group">
+          <td class="method-group">Supervised</td>
+          <td class="group-spacer" colspan="5"></td>
+        </tr>
+        <tr><td>SSF</td><td>0.2764</td><td>0.2651</td><td>0.2451</td><td>0.1955</td><td>0.4000</td></tr>
+        <tr><td>Flow4D</td><td>0.2511</td><td>0.2136</td><td>0.2047</td><td>0.2384</td><td>0.3476</td></tr>
+        <tr><td>&#916;Flow</td><td>0.2391</td><td>0.1901</td><td>0.1959</td><td>0.2196</td><td>0.3500</td></tr>
+
+        <tr><td>SSF (UniFlow, Ours)</td><td>0.2469</td><td>0.2193</td><td>0.2274</td><td>0.2498</td><td>0.2911</td></tr>
+        <tr><td>Flow4D-XL (UniFlow, Ours)</td><td>0.2416</td><td>0.2050</td><td>0.1890</td><td>0.2852</td><td>0.2872</td></tr>
+        <tr><td>&#916;Flow (UniFlow, Ours)</td><td>0.2222</td><td>0.1831</td><td>0.1879</td><td>0.2526</td><td>0.2651</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>
 
     <h2>Citation</h2>
     <div class="citation">@misc{li2025uniflowzeroshotlidarscene,
@@ -320,13 +511,77 @@
     </div>
   </div>
 
+  <div id="video-modal" class="modal" aria-hidden="true">
+    <button class="modal-close" id="video-modal-close" aria-label="Close">×</button>
+    <div class="modal-inner">
+      <video id="video-modal-player" controls preload="metadata">
+        <!-- source will be set by JS -->
+      </video>
+    </div>
+  </div>
+
   <script>
-    const now = new Date();
-    document.getElementById('y').textContent = String(now.getFullYear());
-    document.getElementById('d').textContent = new Intl.DateTimeFormat(undefined, {
-      year: 'numeric', month: 'short', day: '2-digit'
-    }).format(now);
+    // --- footer date ---
+    (function () {
+      const now = new Date();
+      const y = document.getElementById('y');
+      const d = document.getElementById('d');
+      if (y) y.textContent = String(now.getFullYear());
+      if (d) {
+        d.textContent = new Intl.DateTimeFormat(undefined, {
+          year: 'numeric', month: 'short', day: '2-digit'
+        }).format(now);
+      }
+    })();
+
+    // --- video modal logic ---
+    (function () {
+      const inlineVideo = document.getElementById('qual-video');
+      const modal = document.getElementById('video-modal');
+      const modalPlayer = document.getElementById('video-modal-player');
+      const closeBtn = document.getElementById('video-modal-close');
+
+      if (!inlineVideo || !modal || !modalPlayer || !closeBtn) return;
+
+      function openVideoModal(src) {
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        modalPlayer.innerHTML = `<source src="${src}" type="video/mp4">`;
+        modalPlayer.load();
+        modalPlayer.play().catch(() => {});
+      }
+
+      function closeVideoModal() {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        modalPlayer.pause();
+        modalPlayer.innerHTML = '';
+      }
+
+      // Clicking the inline video opens modal
+      inlineVideo.addEventListener('click', () => {
+        const source = inlineVideo.querySelector('source');
+        if (source && source.getAttribute('src')) {
+          // Use the attribute value so it works even if browser doesn't expand source.src
+          openVideoModal(source.getAttribute('src'));
+        }
+      });
+
+      closeBtn.addEventListener('click', closeVideoModal);
+
+      // Click outside video closes
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeVideoModal();
+      });
+
+      // ESC closes
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) closeVideoModal();
+      });
+    })();
   </script>
+
+
 </body>
 
 </html>
