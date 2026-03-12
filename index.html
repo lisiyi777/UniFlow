@@ -341,24 +341,24 @@
     <figure>
       <img src="figures/teaser.png" alt="UniFlow teaser" />
       <figcaption>
-         RGB views, LiDAR setups, and BEV point clouds from Argoverse 2, Waymo, nuScenes, and TruckScenes illustrate the cross-domain challenge of LiDAR scene flow.
+         Front-center RGB images (top), LiDAR sensor positions (middle), and BEV LiDAR point clouds (bottom) for Argoverse 2, Waymo, nuScenes, and TruckScenes. All four datasets use different sensors, and collect data in different environments. 
       </figcaption>
     </figure>
 
     <hr />
 
     <h2>Abstract</h2>
-    <div class="text">
-      <p>
-        LiDAR scene flow is the task of estimating per-point 3D motion between two point clouds. Recent methods achieve centimeter-level accuracy on popular autonomous vehicle (AV) datasets, but are typically only trained and evaluated on a single sensor. In this paper, we aim to learn general motion priors that transfer to diverse and unseen LiDAR sensors. However, prior work in LiDAR semantic segmentation and 3D object detection demonstrate that naively training on multiple datasets yields worse performance than single dataset models. 
-      </p>
-      </p>
-        Interestingly, we find that this conventional wisdom does not hold for motion estimation, and that state-of-the-art scene flow methods greatly benefit from cross-dataset training. We posit that low-level tasks such as motion estimation may be less sensitive to sensor configuration; indeed, our analysis shows that models trained on fast-moving objects (e.g., from highway datasets) perform well on fast-moving objects, even across different datasets. 
-      </p>
-      </p>
-        Informed by our analysis, we propose UniFlow, a family of feedforward models that unifies and trains on multiple large-scale LiDAR scene flow datasets with diverse sensor placements and point cloud densities. Our frustratingly simple solution establishes a new state-of-the-art on Waymo and nuScenes, improving over prior work by 5.1% and 35.2% respectively. Moreover, UniFlow achieves state-of-the-art accuracy on unseen datasets like TruckScenes, outperforming prior TruckScenes-specific models by 30.1%.        
-      </p>
-    </div>
+      <div class="text">
+        <p>
+          LiDAR scene flow is the task of estimating per-point 3D motion between consecutive point clouds. Recent methods achieve centimeter-level accuracy on popular autonomous vehicle (AV) datasets, but are typically only trained and evaluated on a single sensor. In this paper, we aim to learn general motion priors that transfer to diverse and unseen LiDAR sensors.  
+        </p>
+        <p>
+          However, prior work in LiDAR semantic segmentation and 3D object detection demonstrate that naively training on multiple datasets yields worse performance than single dataset models. Interestingly, we find that this conventional wisdom does <i>not</i> hold for motion estimation, and that state-of-the-art scene flow methods greatly benefit from cross-dataset training <i>without architectural modification</i>. We posit that low-level tasks such as motion estimation may be less sensitive to sensor configuration; indeed, our analysis shows that models trained on fast-moving objects (e.g., from highway datasets) perform well on fast-moving objects, even across different datasets.  
+        </p>
+        <p>
+          Informed by our analysis, we propose UniFlow, a feedforward model that unifies and trains on multiple large-scale LiDAR scene flow datasets with diverse sensor placements and point cloud densities. Our frustratingly simple solution establishes a new state-of-the-art on Waymo and nuScenes, improving over prior work by 5.1% and 35.2% respectively. Moreover, UniFlow achieves state-of-the-art accuracy on <i>unseen datasets</i> like TruckScenes and AEVAScenes, outperforming prior dataset-specific models by 30.1% and 22.5% respectively.
+        </p>
+      </div>
 
     <hr />
 
@@ -367,55 +367,92 @@
     <figure>
       <img src="figures/figure_two.png" alt="Velocity distribution and bucketed performance" />
       <figcaption>
+        <b>Cross-Dataset Generalization Correlates with Velocity Distribution.</b>
         The velocity distributions for the AV2, Waymo, nuScenes, and TruckScenes train sets (top). The Dynamic Mean EPE per velocity bin of Flow4D trained on AV2, Waymo, nuScenes, TruckScenes, and UniFlow (bottom). Notably, Flow4D trained on TruckScenes outperforms Flow4D trained on any other dataset for fast-moving objects (2.0, ∞) across all datasets, as TruckScenes contains the largest number of fast-moving objects.
       </figcaption>
     </figure>
+<h2>Quantitative Results</h2>
 
-    <hr />
+<div class="cvpr-table-wrap">
+  <table class="cvpr-table" aria-label="Dynamic Bucket-Normalized Mean EPE on in-domain datasets">
+    <thead>
+      <tr>
+        <th>Method</th>
+        <th>AV2</th>
+        <th>Waymo</th>
+        <th>nuScenes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>NSFP</td><td>0.422</td><td>0.574</td><td>0.602</td></tr>
+      <tr><td>FastNSF</td><td>0.383</td><td>–</td><td>0.560</td></tr>
+      <tr><td>SeFlow</td><td>0.309</td><td>0.328</td><td>0.554</td></tr>
+      <tr><td>ICP Flow</td><td>0.331</td><td>–</td><td>–</td></tr>
+      <tr><td>DeFlow</td><td>0.276</td><td>–</td><td>0.314</td></tr>
+      <tr><td>SSF</td><td>0.181</td><td>0.264</td><td>0.220</td></tr>
+      <tr><td>Flow4D</td><td>0.145</td><td>0.215</td><td>0.230</td></tr>
+      <tr><td>&#916;Flow</td><td>0.113</td><td>0.198</td><td>0.216</td></tr>
 
-    <h2>Quantitative Results</h2>
+      <tr class="cvpr-group">
+        <td class="method-group">UniFlow</td>
+        <td class="group-spacer" colspan="3"></td>
+      </tr>
+      <tr><td>UniFlow-SSF</td><td>0.156</td><td>0.234</td><td>0.144</td></tr>
+      <tr><td>UniFlow-Flow4D</td><td>0.132</td><td>0.191</td><td>0.196</td></tr>
+      <tr><td>UniFlow-&#916;Flow</td><td>0.118</td><td>0.188</td><td>0.140</td></tr>
+    </tbody>
+  </table>
+</div>
 
-    <div class="cvpr-table-wrap">
-      <table class="cvpr-table" aria-label="Dynamic Bucket-Normalized Mean EPE across datasets">
-        <thead>
-          <tr>
-            <th>Method</th>
-            <th>AV2</th>
-            <th>Waymo</th>
-            <th>nuScenes</th>
-            <th>TruckScenes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>NSFP</td><td>0.422</td><td>0.574</td><td>0.602</td><td>0.658</td></tr>
-          <tr><td>FastNSF</td><td>0.383</td><td>–</td><td>0.560</td><td>0.588</td></tr>
-          <tr><td>SeFlow</td><td>0.309</td><td>0.328</td><td>0.554</td><td>0.681</td></tr>
-          <tr><td>ICP Flow</td><td>0.331</td><td>–</td><td>–</td><td>0.472</td></tr>
-          <!-- <tr><td>EulerFlow</td><td>0.130</td><td>–</td><td>–</td><td>–</td></tr> -->
-          <!-- <tr><td>TrackFlow</td><td>0.269</td><td>–</td><td>–</td><td>–</td></tr> -->
-          <tr><td>DeFlow</td><td>0.276</td><td>–</td><td>0.314</td><td>0.570</td></tr>
-          <tr><td>SSF</td><td>0.181</td><td>0.264</td><td>0.220</td><td>0.453</td></tr>
-          <tr><td>Flow4D</td><td>0.145</td><td>0.215</td><td>0.230</td><td>0.456</td></tr>
-          <tr><td>&#916;Flow</td><td>0.113</td><td>0.198</td><td>0.216</td><td>0.402</td></tr>
+<div class="text">
+  <p>
+    <b>In-domain performance.</b>
+    We compare UniFlow against recent scene flow methods on AV2, Waymo, and nuScenes using Dynamic Bucket-Normalized Mean EPE. UniFlow establishes a new state-of-the-art on Waymo and nuScenes, improving over prior work by 5.1% and 35.2% respectively.
+  </p>
+</div>
 
-          <tr class="cvpr-group">
-            <td class="method-group">UniFlow (Ours)</td>
-            <td class="group-spacer" colspan="5"></td>
-          </tr>
-          <tr><td>UniFlow-SSF</td><td>0.156</td><td>0.234</td><td>0.144</td><td>0.435</td></tr>
-          <tr><td>UniFlow-Flow4D</td><td>0.132</td><td>0.191</td><td>0.196</td><td>0.281</td></tr>
-          <tr><td>UniFlow-&#916;Flow</td><td>0.118</td><td>0.188</td><td>0.140</td><td>0.101</td></tr>
-        </tbody>
-      </table>
-    </div>
+<div class="cvpr-table-wrap">
+  <table class="cvpr-table" aria-label="Dynamic Bucket-Normalized Mean EPE on unseen datasets">
+    <thead>
+      <tr>
+        <th>Method</th>
+        <th>TruckScenes</th>
+        <th>AEVAScenes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>NSFP</td><td>0.658</td><td>–</td></tr>
+      <tr><td>FastNSF</td><td>0.588</td><td>–</td></tr>
+      <tr><td>SeFlow</td><td>0.681</td><td>–</td></tr>
+      <tr><td>ICP Flow</td><td>0.472</td><td>–</td></tr>
+      <tr><td>DeFlow</td><td>0.570</td><td>–</td></tr>
+      <tr><td>SSF</td><td>0.453</td><td>0.759<sup>ZS</sup></td></tr>
+      <tr><td>Flow4D</td><td>0.456</td><td>0.433<sup>ZS</sup></td></tr>
+      <tr><td>&#916;Flow</td><td>0.402</td><td>0.402<sup>ZS</sup></td></tr>
 
-    <div class="text">
-      <p>
-        <b>Comparison to State-of-the-Art Methods.</b>
-        We compare UniFlow against recent scene flow methods using Dynamic Bucket-Normalized Mean EPE across multiple autonomous driving datasets.
-        UniFlow consistently improves performance over single-dataset baselines, with especially strong gains on TruckScenes and nuScenes.
-      </p>
-    </div>
+      <tr class="cvpr-group">
+        <td class="method-group">UniFlow</td>
+        <td class="group-spacer" colspan="2"></td>
+      </tr>
+      <tr><td>UniFlow-SSF</td><td>0.435<sup>ZS</sup></td><td>0.639<sup>ZS</sup></td></tr>
+      <tr><td>UniFlow-Flow4D</td><td>0.281<sup>ZS</sup></td><td>0.448<sup>ZS</sup></td></tr>
+      <tr><td>UniFlow-&#916;Flow</td><td>0.101<sup>ZS</sup></td><td>0.344<sup>ZS</sup></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="text">
+  <p>
+    <b>Generalization to unseen datasets.</b>
+      We compare UniFlow against recent scene flow methods on TruckScenes and AEVAScenes using Dynamic Bucket-Normalized Mean EPE. 
+      <!-- On TruckScenes, UniFlow is evaluated zero-shot, while the baseline methods are trained in-domain. On AEVAScenes, all methods are evaluated zero-shot.  -->
+      UniFlow outperforms prior dataset-specific models by 30.1% on TruckScenes and 22.5% on AEVAScenes. We mark zero-shot results with <sup>ZS</sup>.
+  </p>
+</div>
+
+
+<hr />
+
 
 <hr />
 
@@ -427,10 +464,13 @@
     alt="Zero-shot generalization on TruckScenes: ΔFlow vs ΔFlow (UniFlow)"
   />
   <figcaption>
-    Compared to dataset-specific &#916;Flow, &#916;Flow (UniFlow) produces more accurate motion estimates for rare objects
-    and long-range vehicles under challenging conditions.
+        <b>Zero-Shot Generalization on TruckScenes.</b>
+          Compared with the dataset-specific &#916;Flow model, &#916;Flow (UniFlow) produces more accurate motion estimates, with better robustness to rain artifacts (on the top left) and stronger generalization to rare vehicles (middle row) and long-range vehicles (bottom row).
   </figcaption>
 </figure>
+
+
+<h2>Video</h2>
 
 <figure>
   <video id="qual-video" class="clickable-media" controls playsinline preload="metadata">
@@ -441,7 +481,7 @@
 
 <div class="text">
   <p>
-    Scene flow predictions on a challenging rainy sequence from TruckScenes. As shown above and in the video, &#916;Flow frequently produces artifacts on rain streaks and background points, which become especially pronounced during occlusions, and predicts inconsistent flow vectors on dynamic objects. In contrast, &#916;Flow (UniFlow) yields significantly more stable and coherent motion fields.
+    <b>Challenging rainy sequence from TruckScenes.</b> As shown above and in the video, &#916;Flow (left) frequently produces artifacts on rain streaks and background points, which become especially pronounced during occlusions, and predicts inconsistent flow vectors on dynamic objects. In contrast, &#916;Flow (UniFlow) (right) yields significantly more stable and coherent motion fields.
   </p>
 </div>
 
