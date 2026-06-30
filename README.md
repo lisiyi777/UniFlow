@@ -1,8 +1,9 @@
 # UniFlow
 
-This repository contains the official implementation of the paper 
+This repository contains the official implementation of the ECCV 2026 paper
 
-**UniFlow: Towards Zero-Shot LiDAR Scene Flow for Autonomous Vehicles via Cross-Domain Generalization**  [[arXiv]](https://arxiv.org/abs/2511.18254) · [[Project Page]](https://lisiyi777.github.io/UniFlow/)
+**UniFlow: Zero-Shot LiDAR Scene Flow for Autonomous Vehicles**  
+[[arXiv]](https://arxiv.org/abs/2511.18254) · [[Project Page]](https://lisiyi777.github.io/UniFlow/)
 
 ---
 
@@ -87,14 +88,11 @@ python train.py \
 If you find UniFlow useful in your research, please consider citing:
 
 ```bibtex
-@misc{li2025uniflowzeroshotlidarscene,
-      title={UniFlow: Towards Zero-Shot LiDAR Scene Flow for Autonomous Vehicles via Cross-Domain Generalization}, 
-      author={Siyi Li and Qingwen Zhang and Ishan Khatri and Kyle Vedder and Deva Ramanan and Neehar Peri},
-      year={2025},
-      eprint={2511.18254},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2511.18254}, 
+@inproceedings{li2026uniflow,
+  title={UniFlow: Zero-Shot LiDAR Scene Flow for Autonomous Vehicles},
+  author={Siyi Li and Qingwen Zhang and Ishan Khatri and Kyle Vedder and Eric Eaton and Deva Ramanan and Neehar Peri},
+  booktitle={European Conference on Computer Vision (ECCV)},
+  year={2026}
 }
 ```
 
