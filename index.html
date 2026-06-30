@@ -85,6 +85,24 @@
       font-size: 16px;
     }
 
+    .venue {
+      margin-top: 12px;
+      color: #111;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .venue .tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: #f0f0f0;
+      border: 1px solid #ddd;
+      font-size: 16px;
+      font-weight: 700;
+      margin-right: 6px;
+    }
+
     .links {
       margin-top: 16px;
     }
@@ -174,6 +192,34 @@
       background: #000;
     }
 
+    .citation-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .citation-toolbar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .copy-citation {
+      border: 1px solid #ddd;
+      border-radius: 999px;
+      background: #fff;
+      color: #222;
+      padding: 6px 13px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .copy-citation:hover {
+      background: #f5f5f5;
+    }
+
     .citation {
       background: #f5f5f5;
       border: 1px solid #e2e2e2;
@@ -182,8 +228,6 @@
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       font-size: 14px;
       overflow-x: auto;
-      max-width: 900px;
-      margin: 0 auto;
       white-space: pre;
     }
 
@@ -331,6 +375,10 @@
       <sup>1</sup>University of Pennsylvania &nbsp;&nbsp;
       <sup>2</sup>KTH Royal Institute of Technology &nbsp;&nbsp;
       <sup>3</sup>Carnegie Mellon University
+    </div>
+
+    <div class="center venue">
+      <span class="tag">ECCV 2026</span> Accepted to the European Conference on Computer Vision
     </div>
 
     <div class="center links">
@@ -638,7 +686,7 @@
   </div>
 </section>
 
-  <h2>Citation</h2>
+  <!-- <h2>Citation</h2>
   <div class="citation">@misc{li2025uniflowzeroshotlidarscene,
     title={UniFlow: Zero-Shot LiDAR Scene Flow for Autonomous Vehicles},
     author={Siyi Li and Qingwen Zhang and Ishan Khatri and Kyle Vedder and Eric Eaton and Deva Ramanan and Neehar Peri},
@@ -648,8 +696,20 @@
     primaryClass={cs.CV},
     doi={10.48550/arXiv.2511.18254},
     url={https://arxiv.org/abs/2511.18254}
-  }</div>
-
+  }</div> -->
+  <h2>Citation</h2>
+  <div class="citation-wrap">
+    <div class="citation-toolbar">
+      <button class="copy-citation" id="copy-citation" type="button" aria-label="Copy BibTeX citation">Copy</button>
+    </div>
+    <div class="citation" id="citation-text">@inproceedings{li2026uniflow,
+  title={UniFlow: Zero-Shot LiDAR Scene Flow for Autonomous Vehicles},
+  author={Siyi Li and Qingwen Zhang and Ishan Khatri and Kyle Vedder and Eric Eaton and Deva Ramanan and Neehar Peri},
+  booktitle={European Conference on Computer Vision (ECCV)},
+  year={2026}
+}</div>
+  </div>
+  
     <div class="footer">
       © <span id="y"></span> UniFlow Authors · Last updated <span id="d"></span>
     </div>
@@ -676,6 +736,47 @@
           year: 'numeric', month: 'short', day: '2-digit'
         }).format(now);
       }
+    })();
+
+    // --- citation copy button ---
+    (function () {
+      const copyBtn = document.getElementById('copy-citation');
+      const citation = document.getElementById('citation-text');
+
+      if (!copyBtn || !citation) return;
+
+      function setButtonText(text) {
+        copyBtn.textContent = text;
+        window.setTimeout(() => {
+          copyBtn.textContent = 'Copy BibTeX';
+        }, 1600);
+      }
+
+      async function copyCitation() {
+        const text = citation.textContent.trim();
+
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+          } else {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.setAttribute('readonly', '');
+            textarea.style.position = 'absolute';
+            textarea.style.left = '-9999px';
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+          }
+          setButtonText('Copied!');
+        } catch (err) {
+          console.error('Failed to copy citation:', err);
+          setButtonText('Copy failed');
+        }
+      }
+
+      copyBtn.addEventListener('click', copyCitation);
     })();
 
     // --- video modal logic ---
